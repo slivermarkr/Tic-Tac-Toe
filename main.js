@@ -7,9 +7,30 @@ function Gameboard() {
  for(let i = 0;  i < rows; i++) {
   board[i] = [];
   for(let j = 0; j < columns; j++) {
-   board[i].push("");
+   board[i].push(Cell());
   }
+ };
+
+ co= dropToken = (player) => {
+  const availableCell = board.filter((row) => row[column].getValue() === 0).map(row => row[column]);
  }
- console.log(board)
+
+ const printBoard = () => {
+
+ }
 }
 
+function Cell() {
+ let value = ""
+
+ const addToken = (player) => {
+  value = player
+ }
+
+ const getValue = () => value;
+
+ return {
+  addToken,
+  getValue
+ }
+}

@@ -54,6 +54,25 @@ function Cell() {
  }
 }
 
-function Players() {
+
+//function that prompts for players name
+
+function PlayerName() {
+ let player = 1
+ let name = ""
+ const getPlayerName = () => {
+  name = prompt(`Player ${player}'s name:`)
+  player++
+ };
+
+ const getName = () => name;
+ 
+ return {
+  getPlayerName,
+  getName
+ }
+}
+
+function GameController() {
 
 }

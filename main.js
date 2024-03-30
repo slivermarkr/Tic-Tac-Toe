@@ -18,8 +18,23 @@ function Gameboard() {
   } 
  }
 
- const drawToken = (column, player) => {
+ const getBoard = () => board;
+ const drawToken = (column, player,row) => {
 
+  board.filter(row => {
+   if(row[column].getValue() !== "") return;
+  })
+  board[row][column].addToken(player);
+ }
+
+ const printBoard = () => {
+
+
+  return {
+   drawToken,
+   printBoard,
+   getBoard
+  }
  }
 }
 
@@ -35,4 +50,8 @@ function Cell() {
   addToken,
   getValue
  }
+}
+
+function Players() {
+
 }

@@ -18,8 +18,10 @@ function Gameboard() {
   } 
  }
 
+
  const getBoard = () => board;
- const drawToken = (column, player,row) => {
+
+ const drawToken = (row, column, player) => {
 
   board.filter(row => {
    if(row[column].getValue() !== "") return;

@@ -85,3 +85,7 @@ function Player() {
 function GameController() {
 
 }
+
+function createPlayer(name) {
+ 
+}

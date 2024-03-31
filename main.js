@@ -58,18 +58,19 @@ function Cell() {
 //function that prompts for players name
 
 function PlayerName() {
- let player = 1
+ let playerId = 1
  let name = ""
  const getPlayerName = () => {
   name = prompt(`Player ${player}'s name:`)
-  player++
+  playerId++
  };
 
  const getName = () => name;
- 
+ const getPlayerId = () => playerId;
  return {
   getPlayerName,
-  getName
+  getName,
+  getPlayerId
  }
 }
 

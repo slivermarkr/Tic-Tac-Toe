@@ -57,20 +57,27 @@ function Cell() {
 
 //function that prompts for players name
 
-function PlayerName() {
- let playerId = 1
+function Player() {
+ let id = 1
  let name = ""
+ let token = "X"
  const getPlayerName = () => {
   name = prompt(`Player ${player}'s name:`)
-  playerId++
+  id++
  };
 
  const getName = () => name;
- const getPlayerId = () => playerId;
+
+ const getPlayerId = () => id;
+
+ const playerToken = () => {
+  token = token === "X" ? "O" : "X";
+ }
  return {
   getPlayerName,
   getName,
-  getPlayerId
+  getPlayerId,
+  playerToken
  }
 }
 

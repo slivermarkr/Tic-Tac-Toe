@@ -56,22 +56,29 @@ function Cell() {
 
 
 //function that prompts for players name
-
-function GameController() {
-
-}
-
 function Player() {
  let name = "";
-
+ let symbol = undefined;
  const playerName = (input) => {
   name = input
  };
 
  const getPlayerName = () => name;
 
+ const addSymbol = (input) => {
+  symbol = input
+ }
+
+ const getSymbol = () => symbol
+
  return {
   getPlayerName,
-  playerName
+  playerName,
+  addSymbol,
+  getSymbol
  }
+}
+
+function GameController() {
+
 }

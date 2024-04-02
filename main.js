@@ -1,11 +1,3 @@
-//Gameboard has 3x3 dimension cell
-// creatte 2d array board object
-//createt function that draw out the players symbol
-//create function that printsBoard;
-
-// Cell is an object that has value , read value and add value function needed
-
-
 function Gameboard() {
  const rows = 3;
  const columns =  3;
@@ -17,7 +9,6 @@ function Gameboard() {
    board[i].push(Cell());
   } 
  }
-
 
  const getBoard = () => board;
 
@@ -54,12 +45,10 @@ function Cell() {
  }
 }
 
-
-//function that prompts for players name
 function Player() {
  let name = "";
  let symbol = undefined;
- const playerName = (input) => {
+ const addPlayerName = (input) => {
   name = input
  };
 
@@ -73,12 +62,18 @@ function Player() {
 
  return {
   getPlayerName,
-  playerName,
+  addPlayerName,
   addSymbol,
   getSymbol
  }
 }
 
 function GameController() {
+ const board = Gameboard()
+ const playerOne = prompt("Player One name?")
+ const playerTwo = prompt("Player Two name?")
 
+ return {
+  playerOne,playerTwo
+ }
 }

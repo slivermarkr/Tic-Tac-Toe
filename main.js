@@ -86,6 +86,10 @@ function GameController() {
 
 }
 
-function createPlayer(name) {
- 
+function Player(name) {
+ const getPlayerName = () => name;
+
+ return {
+  getPlayerName
+ }
 }

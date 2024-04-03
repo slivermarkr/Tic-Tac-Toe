@@ -21,13 +21,12 @@ function Gameboard() {
  }
 
  const printBoard = () => {
-
-
-  return {
-   drawToken,
-   printBoard,
-   getBoard
-  }
+ }
+ 
+ return {
+  drawToken,
+  printBoard,
+  getBoard
  }
 }
 

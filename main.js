@@ -50,33 +50,38 @@ function Cell() {
 
 function Player() {
  let name = "";
- let symbol = undefined;
  const addPlayerName = (input) => {
   name = input
  };
-
  const getPlayerName = () => name;
-
- const addSymbol = (input) => {
-  symbol = input
- }
-
- const getSymbol = () => symbol
 
  return {
   getPlayerName,
-  addPlayerName,
-  addSymbol,
-  getSymbol
+  addPlayerName
  }
 }
 
 function GameController() {
  const board = Gameboard()
- const playerOne = prompt("Player One name?")
- const playerTwo = prompt("Player Two name?")
+ const playerOne = Player();
+ const playerTwo = Player()
 
+ const players = [
+  {
+    name: playerOne,
+    token: "X"
+  },
+  {
+    name: playerTwo,
+    token: "O"
+  }
+];
+let currentPlayer = players[0];
+
+const switchPlayersTurn = () => {
+  currentPlayer = currentPlayer === players[0] ? players[1] : players[1]
+}
+const getActivePlayer = () => currentPlayer;
  return {
-  playerOne,playerTwo
  }
 }

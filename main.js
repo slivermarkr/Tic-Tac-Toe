@@ -83,5 +83,10 @@ const switchPlayersTurn = () => {
 }
 const getActivePlayer = () => currentPlayer;
  return {
+  switchPlayersTurn,
+  getActivePlayer,
+  getBoard: board.getBoard,
+  playerOne,
+  playerTwo
  }
 }

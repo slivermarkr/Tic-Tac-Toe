@@ -82,11 +82,20 @@ const switchPlayersTurn = () => {
   currentPlayer = currentPlayer === players[0] ? players[1] : players[1]
 }
 const getActivePlayer = () => currentPlayer;
+
+const printNewRound = () => {
+  board.printBoard();
+
+  console.log(`${getActivePlayer().name}'s turn.`);
+}
+
+const playRound = () => {
+
+}
  return {
   switchPlayersTurn,
   getActivePlayer,
   getBoard: board.getBoard,
-  playerOne,
-  playerTwo
+  printNewRound
  }
 }

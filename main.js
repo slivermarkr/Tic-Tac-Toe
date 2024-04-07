@@ -89,7 +89,7 @@ const printNewRound = () => {
   console.log(`${getActivePlayer().name}'s turn.`);
 }
 
-const playRound = () => {
+const playRound = (row, column) => {
 
 }
  return {

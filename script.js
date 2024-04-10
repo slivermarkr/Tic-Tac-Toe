@@ -15,17 +15,18 @@ function Gameboard() {
 
  const drawToken = (row,column,playerToken) => {
   board.filter(row => {
-   if(row[column].getValue()=== "") return;
+   if(row[column].getToken()=== "") return;
   })
   board[row][column].addToken(playerToken);
  }
 
  const printBoard = () => {
-  const boardWithCellValues = board.map(row => {
-   row.map(cell => cell.getToken())
-  });
-  console.log(boardWithCellValues)
+  const boardWithCellValues = board.map((row) => row.map(cell => cell.getToken()))
+
+  console.log(boardWithCellValues);
  }
+
+ 
  return {
   getBoard,
   drawToken,

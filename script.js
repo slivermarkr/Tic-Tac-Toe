@@ -44,13 +44,43 @@ function Cell() {
  return {addToken, getToken};
 }
 
+function Player() {
+ let name = "";
+
+ const addPlayerName = (input) => {
+  name = input;
+ }
+
+ const getPlayerName = () => name;
+ 
+ return {
+  addPlayerName,
+  getPlayerName
+ }
+}
+
 function GameController() {
 const board = Gameboard();
 
-function createPlayer(name,token) {
- return {name,token};
-}
+const playerOne = Player();
+const playerTwo = Player();
 
-}
+playerOne.addPlayerName("Mark")
+playerTwo.addPlayerName("Henry")
 
+const players = [
+ {
+  name: playerOne.getPlayerName(),
+  token: "X"
+ },
+ {
+  name: playerTwo.getPlayerName(),
+  token: "O"
+ }
+]
+
+return {
+ players
+}
+}
 

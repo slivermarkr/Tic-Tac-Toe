@@ -45,9 +45,12 @@ function Cell() {
 }
 
 function GameController() {
- 
+const board = Gameboard();
+
+function createPlayer(name,token) {
+ return {name,token};
 }
 
-function PlayerCreate() {
- 
 }
+
+

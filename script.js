@@ -12,7 +12,6 @@ function Gameboard() {
 
  const getBoard = () => board;
 
-
  const drawToken = (row,column,playerToken) => {
   board.filter(row => {
    if(row[column].getToken()=== "") return;
@@ -25,7 +24,6 @@ function Gameboard() {
 
   console.log(boardWithCellValues);
  }
-
  
  return {
   getBoard,
@@ -44,4 +42,12 @@ function Cell() {
  const getToken = () => value;
 
  return {addToken, getToken};
+}
+
+function GameController() {
+ 
+}
+
+function PlayerCreate() {
+ 
 }

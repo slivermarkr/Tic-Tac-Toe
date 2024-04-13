@@ -79,16 +79,22 @@ const players = [
  }
 ]
 
-let activePlayer = players[0];
+let currentPlayer = players[0];
 
-const switchActivePlayer = () => {
- activePlayer = activePLayer === players[0] ? players[1] : players[0];
+const switchCurrentPlayer = () => {
+ currentPlayer = currentPlayer === players[0] ? players[1] : players[0];
 }
-const getActivePlayer = () => activePLayer;
+const getActivePlayer = () => currentPlayer;
+
+const printNewRound = () => {
+ board.printBoard();
+ console.log(`${getActivePlayer().name}'s turn`);
+}
 return {
  players,
- switchActivePlayer,
- getActivePlayer
+ switchCurrentPlayer,
+ getActivePlayer,
+ printNewRound
 }
 }
 

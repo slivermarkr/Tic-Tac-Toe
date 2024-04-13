@@ -90,11 +90,20 @@ const printNewRound = () => {
  board.printBoard();
  console.log(`${getActivePlayer().name}'s turn`);
 }
+
+const playRound = (row, column) => {
+ console.log(`Drawing ${getActivePlayer().name}'s into ${row} row and ${column}`);
+
+ board.dropToken(row,column,getActivePlayer().token);
+ switchCurrentPlayer(
+ printNewRound()
+ )
+}
+printNewRound()
 return {
- players,
- switchCurrentPlayer,
+ playRound,
  getActivePlayer,
- printNewRound
+ getBoard: board.getBoard
 }
 }
 

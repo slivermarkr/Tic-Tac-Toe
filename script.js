@@ -79,8 +79,16 @@ const players = [
  }
 ]
 
+let activePlayer = players[0];
+
+const switchActivePlayer = () => {
+ activePlayer = activePLayer === players[0] ? players[1] : players[0];
+}
+const getActivePlayer = () => activePLayer;
 return {
- players
+ players,
+ switchActivePlayer,
+ getActivePlayer
 }
 }
 

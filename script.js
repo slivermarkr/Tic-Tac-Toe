@@ -94,10 +94,9 @@ const printNewRound = () => {
 const playRound = (row, column) => {
  console.log(`Drawing ${getActivePlayer().name}'s into ${row} row and ${column}`);
 
- board.dropToken(row,column,getActivePlayer().token);
- switchCurrentPlayer(
- printNewRound()
- )
+ board.drawToken(row,column,getActivePlayer().token);
+ switchCurrentPlayer()
+  printNewRound()
 }
 printNewRound()
 return {

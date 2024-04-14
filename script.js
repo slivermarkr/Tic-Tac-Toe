@@ -14,7 +14,7 @@ function Gameboard() {
 
  const drawToken = (row,column,playerToken) => {
   board.filter(row => {
-   if(row[column].getToken()=== "") return;
+   if(row[column].getToken() !== "") return;
   })
   board[row][column].addToken(playerToken);
  }
@@ -33,7 +33,7 @@ function Gameboard() {
 }
 
 function Cell() {
- let value  = "";
+ let value  = 0;
 
  const addToken = (playerToken) => {
   value = playerToken
@@ -92,11 +92,11 @@ const printNewRound = () => {
 }
 
 const playRound = (row, column) => {
- console.log(`Drawing ${getActivePlayer().name}'s into ${row} row and ${column}`);
+ console.log(`Drawing ${getActivePlayer().name}'s ${getActivePlayer().token} into ${row} row and ${column} column`);
 
  board.drawToken(row,column,getActivePlayer().token);
  switchCurrentPlayer()
-  printNewRound()
+ printNewRound()
 }
 printNewRound()
 return {

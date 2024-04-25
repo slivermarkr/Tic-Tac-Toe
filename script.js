@@ -46,8 +46,8 @@ function Player() {
 }
 
 function GameController(
- playerOneName = "Mark",
- playerTwoName = "Henry"
+ playerOneName,
+ playerTwoName
 ) {
 
  const board = Gameboard();
@@ -94,10 +94,13 @@ function GameController(
 
 
 function ScreenController() {
- const game = GameController()
+ const playerOne = prompt("Enter Player One:")
+ const playerTwo = prompt("enter Player Two:")
+ const game = GameController(`${playerOne}`,`${playerTwo}`)
  const playerTurnDiv = document.querySelector('.turn');
  const boardDiv = document.querySelector('.board');
-
+ const greetings = document.querySelector('.greetings');
+ greetings.style.display = "none";
 
  const updateScreen =  () => {
  boardDiv.textContent = ''
@@ -130,6 +133,15 @@ function ScreenController() {
  boardDiv.addEventListener("click",clickHandlerBoard);
  updateScreen()
 
+ // const StartGame = () => {
+
+ // }
+
+ // startButton.addEventListener('click', StartGame)
+}
+function StartGame() {
+ const startButton = document.querySelector('.start');
+ startButton.addEventListener('click' , ScreenController);
 }
 
-ScreenController()
+StartGame();

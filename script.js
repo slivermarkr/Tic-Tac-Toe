@@ -15,7 +15,7 @@ function Gameboard() {
  
  const drawToken = (row, column, player) => {
   board.filter(row => {
-   if(!row[column].getToken() === 0) return;
+   if(row[column].getToken() !== 0) return;
   })
   board[row][column].addToken(player);
  }
@@ -80,7 +80,6 @@ function GameController(
  }
 
  const playRound = (row, column) => {
-
   console.log(`Drawing ${getActivePlayer().name}'s token to ${row} and ${column}`)
 
   board.drawToken(row,column,getActivePlayer().token);
@@ -123,16 +122,16 @@ function ScreenController() {
  }
 
  function clickHandlerBoard (e) {
-  console.log(e.target);
   if(!e.target.classList.contains('cell')) return;
   const selectedRow = e.target.dataset.row;
   const selectedCol = e.target.dataset.column;
-
+  
   game.playRound(selectedRow,selectedCol);
   updateScreen()
  }
- boardDiv.addEventListener('click',clickHandlerBoard);
+ boardDiv.addEventListener("click",clickHandlerBoard);
  updateScreen()
+
 }
 
 ScreenController()

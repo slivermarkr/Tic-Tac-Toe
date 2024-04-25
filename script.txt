@@ -135,3 +135,14 @@
 //  updateScreen()
 // }
 // ScreenController();
+
+
+
+
+
+looping through the board : me.getBoard().filter((row,indexRow) => {
+ console.log(`I'm row: ${indexRow}`);
+ row.filter((cell,indexCol) => {
+  console.log(`I'm col ${indexCol} in row:${indexRow}`)
+ })
+})

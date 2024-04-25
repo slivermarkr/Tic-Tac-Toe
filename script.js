@@ -31,7 +31,7 @@ function Gameboard() {
 }
 
 function Cell() {
- let value = 0;
+ let value = "";
 
  const addToken = (playerToken) =>  {
   value = playerToken
@@ -80,6 +80,7 @@ function GameController(
  }
 
  const playRound = (row, column) => {
+
   console.log(`Drawing ${getActivePlayer().name}'s token to ${row} and ${column}`)
 
   board.drawToken(row,column,getActivePlayer().token);
@@ -88,9 +89,50 @@ function GameController(
  }
  printNewBoard()
  return {
-  switchPlayerTurn,
   getActivePlayer,
-  printNewBoard,
-  playRound
+  playRound,
+  getBoard: board.getBoard
  }
 }
+
+
+function ScreenController() {
+ const game = GameController()
+ const playerTurnDiv = document.querySelector('.turn');
+ const boardDiv = document.querySelector('.board');
+
+
+ const updateScreen =  () => {
+ boardDiv.textContent = ''
+ const board = game.getBoard();
+ const activePlayer = game.getActivePlayer();
+
+ playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
+
+ board.forEach((row,indexRow) => {
+  row.forEach((cell, indexCol) => {
+   const cellButton = document.createElement('button');
+   cellButton.classList.add('cell');
+
+   cellButton.dataset.row = indexRow;
+   cellButton.dataset.column = indexCol;
+   cellButton.textContent = cell.getToken();
+   boardDiv.appendChild(cellButton);
+  })
+ })
+ }
+
+ function clickHandlerBoard (e) {
+  console.log(e.target);
+  if(!e.target.classList.contains('cell')) return;
+  const selectedRow = e.target.dataset.row;
+  const selectedCol = e.target.dataset.column;
+
+  game.playRound(selectedRow,selectedCol);
+  updateScreen()
+ }
+ boardDiv.addEventListener('click',clickHandlerBoard);
+ updateScreen()
+}
+
+ScreenController()

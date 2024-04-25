@@ -14,9 +14,6 @@ function Gameboard() {
 
  
  const drawToken = (row, column, player) => {
-  board.filter(row => {
-   if(row[column].getToken() !== 0) return;
-  })
   board[row][column].addToken(player);
  }
 
@@ -81,7 +78,8 @@ function GameController(
 
  const playRound = (row, column) => {
   console.log(`Drawing ${getActivePlayer().name}'s token to ${row} and ${column}`)
-
+  
+  if(board.getBoard()[row][column].getToken() !== "") return;
   board.drawToken(row,column,getActivePlayer().token);
   switchPlayerTurn()
   printNewBoard()
@@ -128,7 +126,7 @@ function ScreenController() {
   
   game.playRound(selectedRow,selectedCol);
   updateScreen()
- }
+ }  
  boardDiv.addEventListener("click",clickHandlerBoard);
  updateScreen()
 

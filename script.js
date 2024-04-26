@@ -100,6 +100,8 @@ function ScreenController() {
  const playerTurnDiv = document.querySelector('.turn');
  const boardDiv = document.querySelector('.board');
  const greetings = document.querySelector('.greetings');
+
+ const resetButton = document.querySelector('.reset');
  greetings.style.display = "none";
 
  const updateScreen =  () => {
@@ -133,11 +135,17 @@ function ScreenController() {
  boardDiv.addEventListener("click",clickHandlerBoard);
  updateScreen()
 
- // const StartGame = () => {
+ const reset = () => {
+  const board = game.getBoard()
+  board.forEach((row) => {
+   row.forEach((cell) => {
+    cell.addToken("")
+   })
+  })
+  updateScreen()
+ }
 
- // }
-
- // startButton.addEventListener('click', StartGame)
+ resetButton.addEventListener('click',reset)
 }
 function StartGame() {
  const startButton = document.querySelector('.start');

@@ -95,7 +95,7 @@ function GameController(
 
 function ScreenController() {
  const playerOne = prompt("Enter Player One:")
- const playerTwo = prompt("enter Player Two:")
+ const playerTwo = prompt("Enter Player Two:")
  const game = GameController(`${playerOne}`,`${playerTwo}`)
  const playerTurnDiv = document.querySelector('.turn');
  const boardDiv = document.querySelector('.board');
@@ -152,4 +152,27 @@ function StartGame() {
  startButton.addEventListener('click' , ScreenController);
 }
 
+function CheckWin(board, player) {
+
+ for (let i = 0; i < 3; i ++) {
+  if(board[i][0] === player && board[i][1] === player &&  board[i][2] === player) {
+   return true
+  }
+ }
+
+ for (let i = 0; i < 3; i ++) {
+  if(board[0][i] === player && board[1][i] === player &&  board[2][i] === player) {
+   return true
+  }
+ }
+
+ if ((board[0][0] === player && board[1][1] === player && board[2][2] === player) ||
+ (board[0][2] === player && board[1][1] === player && board[2][0] === player)) {
+ return true;
+}
+ return false;
+}
+function CheckDraw() {
+ return board.every(row => row.every(cell => cell !== ""));
+}
 StartGame();

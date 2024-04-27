@@ -73,36 +73,23 @@ function GameController(
   board.printBoard();
  }
 
- // const playRound = (row, column) => {
-
- //  console.log(`Drawing ${getActivePlayer().name}'s token to ${row} and ${column}`)
-  
- //  if(board.getBoard()[row][column].getToken() !== "") return;
-
- //  board.drawToken(row,column,getActivePlayer().token);
- //  switchPlayerTurn();
- //  printNewBoard();
-  
- //  if(CheckWin(board.getBoard(),getActivePlayer().token)){
- //   alert(`${getActivePlayer().name} wins!`);
- //   return
- //  }
- //  if(CheckDraw(board.getBoard())){
- //   alert("It's a draw!");
- //   return
- //  }
- // }
  const playRound = (row, column) => {
   console.log(`Drawing ${getActivePlayer().name}'s token to ${row} and ${column}`);
 
   if (board.getBoard()[row][column].getToken() !== "") return;
 
-  if(CheckWin(board.getBoard(),getActivePlayer().token)){
-    alert(`${getActivePlayer().name} wins!`);
-  }
+  
   board.drawToken(row, column, getActivePlayer().token);
   switchPlayerTurn();
   printNewBoard();
+  if(CheckWin(board.getBoard(),getActivePlayer().token)){
+    alert(`${getActivePlayer().name} wins!`);
+    return;
+  }
+  if(CheckDraw(board.getBoard())){
+    alert("It's a draw!");
+    return;
+  }
 };
  printNewBoard()
  return {
@@ -173,7 +160,8 @@ function StartGame() {
 }
 
 function CheckWin(board, player) {
-
+    console.log("Checking win condition for player:", player);
+    console.log(board);
  for (let i = 0; i < 3; i ++) {
      if(board[i][0].getToken() === player && board[i][1].getToken() === player &&  board[i][2].getToken() === player) {
      return true
@@ -193,7 +181,14 @@ function CheckWin(board, player) {
  return false;
 }
 function CheckDraw(board) {
- return board.ever(row => row.every(cell => cell !== ""));
+    console.log("Checking draw condition...");
+    for(let i = 0; i < board.length; i++){
+        for(let j = 0; j < board[i].length; j++){
+            if(board[i][j].getToken()==="")
+            return false
+        }
+    }
+    return true;
 }
 StartGame();
 

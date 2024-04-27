@@ -1,101 +1,81 @@
 function Gameboard() {
  const rows = 3;
- const columns =  3;
+ const columns = 3;
  const board = [];
 
- for(let i = 0 ; i < rows; i++) {
+ for(let i = 0; i  < rows; i++) {
   board[i] = [];
-  for(let j = 0 ; j < columns; j++) {
+  for(let j = 0; j < columns; j++){
    board[i].push(Cell());
-  } 
+  }
  }
 
  const getBoard = () => board;
 
- const drawToken = (row, column, player) => {
+ const printBoard = () => {
+  const cellWithValues = board.map((row) => row.map((cell) => cell.getToken()));
+  console.log(cellWithValues);
+ };
 
-  board.filter(row => {
-   if(row[column].getValue() !== "") return;
-  })
+ const drawToken = (row, column, player) => {
   board[row][column].addToken(player);
  }
 
- const printBoard = () => {
-  
-   const boardWithCellValues = board.map(row => row.map(cell => cell.getValue()));
-   console.log(boardWithCellValues);
-   
+ const checkForWin = (board, player) => {
+  //horizontal wins
+  console.log("Checking for win...")
+  for(let i = 0; i < rows; i++) {
+   if(board[i][0].getToken() === player && board[i][1].getToken() === player && board[i][2].getToken() === player)
+   return true;
  }
-
- return {
-  drawToken,
+  return false;
+ }
+ return{
+  getBoard,
   printBoard,
-  getBoard
- }
+  drawToken,
+  checkForWin
+}
 }
 
 function Cell() {
  let value = 0;
- 
- const addToken = (player) => {
-  value = player;
- }
- const getValue = () => value;
 
- return {
-  addToken,
-  getValue
- }
+const getToken = () => value;
+
+const addToken = (player) => {
+ value = player
 }
-
-function Player() {
- let name = "";
- const addPlayerName = (input) => {
-  name = input
- };
- const getPlayerName = () => name;
-
- return {
-  getPlayerName,
-  addPlayerName
- }
+return {
+ getToken,
+ addToken
+}
 }
 
 function GameController() {
  const board = Gameboard()
- const playerOne = Player();
- const playerTwo = Player()
-
  const players = [
   {
-    name: playerOne,
-    token: "X"
-  },
-  {
-    name: playerTwo,
-    token: "O"
+   name: "black",
+   token: "X"
   }
-];
-let currentPlayer = players[0];
+ ]
+ let currentPlayer = players[0];
 
-const switchPlayersTurn = () => {
-  currentPlayer = currentPlayer === players[0] ? players[1] : players[1]
-}
-const getActivePlayer = () => currentPlayer;
+ const getActivePlayer = () => currentPlayer;
 
-const printNewRound = () => {
+ const playRound = (row, col) => {
+  board.drawToken(row,col,getActivePlayer().token);
   board.printBoard();
+  if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
+   console.log(`${getActivePlayer().name} wins!!`);
+  }
+ }
 
-  console.log(`${getActivePlayer().name}'s turn.`);
-}
-
-const playRound = (row, column) => {
-
-}
- return {
-  switchPlayersTurn,
-  getActivePlayer,
+ return{
+  playRound,
   getBoard: board.getBoard,
-  printNewRound
+  checkWin: board.checkForWin,
+  getActivePlayer
  }
 }

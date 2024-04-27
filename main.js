@@ -33,8 +33,10 @@ function Gameboard() {
   if(board[0][i].getToken() === player && board[1][i].getToken() === player && board[2][i].getToken() === player)
   return true;
  }
-
- 
+ //diagonal wins
+ if(board[0][2].getToken() === player && board[1][1].getToken() === player && board[2][0].getToken() === player || board[0][0].getToken() === player && board[1][1].getToken() === player && board[2][2].getToken() === player){
+  return true;
+ } 
   return false;
  }
  return{

@@ -22,12 +22,19 @@ function Gameboard() {
  }
 
  const checkForWin = (board, player) => {
-  //horizontal wins
   console.log("Checking for win...")
+  //horizontal wins
   for(let i = 0; i < rows; i++) {
    if(board[i][0].getToken() === player && board[i][1].getToken() === player && board[i][2].getToken() === player)
    return true;
  }
+ //vertical wins
+ for(let i = 0; i < rows; i++) {
+  if(board[0][i].getToken() === player && board[1][i].getToken() === player && board[2][i].getToken() === player)
+  return true;
+ }
+
+ 
   return false;
  }
  return{

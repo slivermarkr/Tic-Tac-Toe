@@ -39,11 +39,23 @@ function Gameboard() {
  } 
   return false;
  }
+
+ const checkForDraw = (board) => {
+  console.log("Checking for draw...");
+  for(let i = 0; i < board.length; i++) {
+    for(let j = 0; j < board[i].length; j++) {
+      if(board[i][j].getToken() === 0)
+      return false;
+    }
+  }
+  return true;
+ }
  return{
   getBoard,
   printBoard,
   drawToken,
-  checkForWin
+  checkForWin,
+  checkForDraw
 }
 }
 
@@ -67,24 +79,38 @@ function GameController() {
   {
    name: "black",
    token: "X"
+  },
+  {
+   name: "white",
+   token: "O"
   }
  ]
  let currentPlayer = players[0];
 
  const getActivePlayer = () => currentPlayer;
 
+ const switchPlayerTurn = () => {
+  currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
+ }
  const playRound = (row, col) => {
   board.drawToken(row,col,getActivePlayer().token);
   board.printBoard();
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
    console.log(`${getActivePlayer().name} wins!!`);
   }
+  if(board.checkForDraw(board.getBoard())){
+   console.log("It's a draw!!");
+  }
+  switchPlayerTurn()
  }
 
  return{
   playRound,
   getBoard: board.getBoard,
   checkWin: board.checkForWin,
-  getActivePlayer
+  getActivePlayer,
+  checkDraw: board.checkForDraw
  }
 }
+
+

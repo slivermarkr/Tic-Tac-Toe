@@ -92,17 +92,27 @@ function GameController() {
  const switchPlayerTurn = () => {
   currentPlayer = currentPlayer === players[0] ? players[1] : players[0]
  }
+ 
+ const printNewBoard = () => {
+  console.log(`${getActivePlayer().name}'s turn...`);
+  board.printBoard()
+ }
  const playRound = (row, col) => {
+  if(board.getBoard()[row][col].getToken() !== 0) return;
+
   board.drawToken(row,col,getActivePlayer().token);
-  board.printBoard();
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
    console.log(`${getActivePlayer().name} wins!!`);
+   return;
   }
   if(board.checkForDraw(board.getBoard())){
    console.log("It's a draw!!");
+   return;
   }
   switchPlayerTurn()
+  printNewBoard()
  }
+ printNewBoard();
 
  return{
   playRound,
@@ -113,4 +123,6 @@ function GameController() {
  }
 }
 
+function ScreenController() {
 
+}

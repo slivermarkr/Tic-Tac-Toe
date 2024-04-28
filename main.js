@@ -137,8 +137,8 @@ const reset = () => {
  }
 }
 
-function ScreenController(first,second) {
-  const game = GameController(first,second);
+function ScreenController(playerOne,playerTwo) {
+  const game = GameController(playerOne,playerTwo);
   const boardDiv = document.querySelector('.board');
   const playerTurnDiv = document.querySelector('.turn');
   const resetButton = document.querySelector('.reset');
@@ -223,6 +223,7 @@ function StartGame() {
     const playerOneName = document.getElementById("playerOne").value;
     const playerTwoName = document.getElementById("playerTwo").value;
     modal.style.display = "none";
+
     ScreenController(playerOneName,playerTwoName);
   }
   const okay = document.querySelector('#okay');

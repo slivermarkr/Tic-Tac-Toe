@@ -154,8 +154,12 @@ function ScreenController() {
   }
 
   const clickHandlerBoard = (e) => {
-
+    const selectedRow = e.target.dataset.row;
+    const selectedCol = e.target.dataset.col;
+    game.playRound(selectedRow,selectedCol);
+    updateScreen();
   }
+  boardDiv.addEventListener('click',clickHandlerBoard);
   return{
     updateScreen
   }

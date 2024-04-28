@@ -142,7 +142,9 @@ function ScreenController(first,second) {
   const boardDiv = document.querySelector('.board');
   const playerTurnDiv = document.querySelector('.turn');
   const resetButton = document.querySelector('.reset');
-  
+  playerTurnDiv.style.fontSize = `${2}rem`;
+  playerTurnDiv.style.color = "black";
+
   const updateScreen = () => {
     const activePlayer = game.getActivePlayer()
     const board = game.getBoard();
@@ -170,10 +172,14 @@ function ScreenController(first,second) {
     const activePlayer = game.getActivePlayer();
     if(game.checkWin(game.getBoard(),activePlayer.token)){
       playerTurnDiv.textContent = `${activePlayer.name} wins!!!`
+      playerTurnDiv.style.color = "lightgreen";
+      playerTurnDiv.style.fontSize = `${3.5}rem`;
       return;
     }
     if(game.checkDraw(game.getBoard())){
       playerTurnDiv.textContent = "It's a draw!!";
+      playerTurnDiv.style.color = "skyblue";
+      playerTurnDiv.style.fontSize = `${3.5}rem`;
       return;
     }
   }
@@ -181,6 +187,8 @@ function ScreenController(first,second) {
   boardDiv.addEventListener('click',clickHandlerBoard);
   
   resetButton.addEventListener('click', () => {
+    playerTurnDiv.style.color = "black"
+    playerTurnDiv.style.fontSize = `${2}rem`;
     game.reset();
     updateScreen();
   });
@@ -195,7 +203,12 @@ function StartGame() {
   const modal = document.querySelector('.modal');
   const startButton = document.querySelector('.start');
   const span = document.querySelector('.close');
-  const players = [];
+
+  const playerTurnDiv = document.querySelector('.turn');
+  playerTurnDiv.textContent = "Click 'Start Game'"
+  playerTurnDiv.style.fontSize = `${2}rem`;
+  playerTurnDiv.style.color = "black";
+
   startButton.addEventListener('click', () => modal.style.display = "block")
 
   span.addEventListener('click', () => modal.style.display = "none")
@@ -207,8 +220,8 @@ function StartGame() {
   })
 
   function startGame() {
-    var playerOneName = document.getElementById("playerOne").value;
-    var playerTwoName = document.getElementById("playerTwo").value;
+    const playerOneName = document.getElementById("playerOne").value;
+    const playerTwoName = document.getElementById("playerTwo").value;
     modal.style.display = "none";
     ScreenController(playerOneName,playerTwoName);
   }

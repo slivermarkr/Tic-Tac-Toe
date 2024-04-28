@@ -118,7 +118,11 @@ function GameController(
   }
   switchPlayerTurn()
   printNewBoard()
- }
+}
+const restart = () => {
+  board.getBoard().forEach(row => row.forEach(cell => cell.addToken("")));
+  currentPlayer = players[0];
+}
  printNewBoard();
 
  return{
@@ -126,7 +130,8 @@ function GameController(
   getBoard: board.getBoard,
   checkWin: board.checkForWin,
   getActivePlayer,
-  checkDraw: board.checkForDraw
+  checkDraw: board.checkForDraw,
+  restart
  }
 }
 
@@ -134,6 +139,7 @@ function ScreenController() {
   const game = GameController("Black", "White");
   const boardDiv = document.querySelector('.board');
   const playerTurnDiv = document.querySelector('.turn');
+  const restartButton = document.querySelector('.reset');
   
 
   const updateScreen = () => {
@@ -161,7 +167,6 @@ function ScreenController() {
     updateScreen();
 
     const activePlayer = game.getActivePlayer();
-    console.log(activePlayer.name);
     if(game.checkWin(game.getBoard(),activePlayer.token)){
       playerTurnDiv.textContent = `${activePlayer.name} wins!!!`
       return;
@@ -173,6 +178,10 @@ function ScreenController() {
 
   }
   boardDiv.addEventListener('click',clickHandlerBoard);
+  restartButton.addEventListener('click', () => {
+    game.restart();
+    updateScreen();
+  });
   updateScreen()
 
 }

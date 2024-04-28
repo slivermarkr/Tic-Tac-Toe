@@ -104,6 +104,7 @@ function GameController(
   if(board.getBoard()[row][col].getToken() !== 0) return;
 
   board.drawToken(row,col,getActivePlayer().token);
+
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
    printNewBoard(); 
    console.log(`${getActivePlayer().name} wins!!`);
@@ -158,8 +159,20 @@ function ScreenController() {
     const selectedCol = e.target.dataset.col;
     game.playRound(selectedRow,selectedCol);
     updateScreen();
+
+    if(game.checkWin(board,activePlayer.token)){
+      playerTurnDiv.textContent = `${activePlayer.name} wins!!!`
+      updateScreen()
+      return;
+    }
+    if(game.checkDraw(board)){
+      playerTurnDiv.textContent = "It's a draw!!";
+      updateScreen()
+      return;
+    }
   }
   boardDiv.addEventListener('click',clickHandlerBoard);
+  updateScreen()
   return{
     updateScreen
   }

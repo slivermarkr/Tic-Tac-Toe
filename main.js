@@ -103,7 +103,7 @@ function GameController(
 
  const playRound = (row, col) => {
   if(board.getBoard()[row][col].getToken() !== "") return;
-
+  if(board.getBoard()[row][col].getToken() === "" && board.checkForWin(board.getBoard(),getActivePlayer().token)) return;
   board.drawToken(row,col,getActivePlayer().token);
 
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){

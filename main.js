@@ -73,15 +73,18 @@ return {
 }
 }
 
-function GameController() {
+function GameController(
+  playerOneName,
+  playerTwoName
+) {
  const board = Gameboard()
  const players = [
   {
-   name: "black",
+   name: playerOneName,
    token: "X"
   },
   {
-   name: "white",
+   name: playerTwoName,
    token: "O"
   }
  ]
@@ -102,10 +105,12 @@ function GameController() {
 
   board.drawToken(row,col,getActivePlayer().token);
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
+   printNewBoard(); 
    console.log(`${getActivePlayer().name} wins!!`);
    return;
   }
   if(board.checkForDraw(board.getBoard())){
+   printNewBoard();
    console.log("It's a draw!!");
    return;
   }
@@ -124,5 +129,34 @@ function GameController() {
 }
 
 function ScreenController() {
+  const game = GameController("Black", "White");
+  const board = game.getBoard();
+  const activePlayer = game.getActivePlayer()
+  const boardDiv = document.querySelector('.board');
+  const playerTurnDiv = document.querySelector('.turn');
+  
 
+  playerTurnDiv.textContent = `${activePlayer.name}
+  's turn`;
+
+  const updateScreen = () => {
+    boardDiv.textContent = '';
+    board.forEach((row, indexRow) => {
+      row.forEach((cell,indexCol) => {
+        const cellButton = document.createElement('button') ;
+        cellButton.classList.add("cell");
+        cellButton.dataset.row = indexRow;
+        cellButton.dataset.col = indexCol;
+        cellButton.textContent = cell.getToken();
+        boardDiv.appendChild(cellButton);
+      })
+    })
+  }
+
+  const clickHandlerBoard = (e) => {
+
+  }
+  return{
+    updateScreen
+  }
 }

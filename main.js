@@ -44,7 +44,7 @@ function Gameboard() {
   console.log("Checking for draw...");
   for(let i = 0; i < board.length; i++) {
     for(let j = 0; j < board[i].length; j++) {
-      if(board[i][j].getToken() === 0)
+      if(board[i][j].getToken() === "")
       return false;
     }
   }
@@ -60,7 +60,7 @@ function Gameboard() {
 }
 
 function Cell() {
- let value = 0;
+ let value = "";
 
 const getToken = () => value;
 
@@ -100,8 +100,9 @@ function GameController(
   console.log(`${getActivePlayer().name}'s turn...`);
   board.printBoard()
  }
+
  const playRound = (row, col) => {
-  if(board.getBoard()[row][col].getToken() !== 0) return;
+  if(board.getBoard()[row][col].getToken() !== "") return;
 
   board.drawToken(row,col,getActivePlayer().token);
 
@@ -131,17 +132,15 @@ function GameController(
 
 function ScreenController() {
   const game = GameController("Black", "White");
-  const board = game.getBoard();
-  const activePlayer = game.getActivePlayer()
   const boardDiv = document.querySelector('.board');
   const playerTurnDiv = document.querySelector('.turn');
   
 
-  playerTurnDiv.textContent = `${activePlayer.name}
-  's turn`;
-
   const updateScreen = () => {
+    const activePlayer = game.getActivePlayer()
+    const board = game.getBoard();
     boardDiv.textContent = '';
+    playerTurnDiv.textContent = `${activePlayer.name}'s turn`;
     board.forEach((row, indexRow) => {
       row.forEach((cell,indexCol) => {
         const cellButton = document.createElement('button') ;
@@ -157,23 +156,25 @@ function ScreenController() {
   const clickHandlerBoard = (e) => {
     const selectedRow = e.target.dataset.row;
     const selectedCol = e.target.dataset.col;
+
     game.playRound(selectedRow,selectedCol);
     updateScreen();
 
-    if(game.checkWin(board,activePlayer.token)){
+    const activePlayer = game.getActivePlayer();
+    console.log(activePlayer.name);
+    if(game.checkWin(game.getBoard(),activePlayer.token)){
       playerTurnDiv.textContent = `${activePlayer.name} wins!!!`
-      updateScreen()
       return;
     }
-    if(game.checkDraw(board)){
+    if(game.checkDraw(game.getBoard())){
       playerTurnDiv.textContent = "It's a draw!!";
-      updateScreen()
       return;
     }
+
   }
   boardDiv.addEventListener('click',clickHandlerBoard);
   updateScreen()
-  return{
-    updateScreen
-  }
+
 }
+
+ScreenController()

@@ -26,6 +26,7 @@ function Gameboard() {
   //horizontal wins
   for(let i = 0; i < rows; i++) {
    if(board[i][0].getToken() === player && board[i][1].getToken() === player && board[i][2].getToken() === player)
+ 
    return true;
  }
  //vertical wins
@@ -104,6 +105,7 @@ function GameController(
  const playRound = (row, col) => {
   if(board.getBoard()[row][col].getToken() !== "") return;
   if(board.getBoard()[row][col].getToken() === "" && board.checkForWin(board.getBoard(),getActivePlayer().token)) return;
+
   board.drawToken(row,col,getActivePlayer().token);
 
   if(board.checkForWin(board.getBoard(),getActivePlayer().token)){
@@ -119,7 +121,7 @@ function GameController(
   switchPlayerTurn()
   printNewBoard()
 }
-const restart = () => {
+const reset = () => {
   board.getBoard().forEach(row => row.forEach(cell => cell.addToken("")));
   currentPlayer = players[0];
 }
@@ -131,17 +133,16 @@ const restart = () => {
   checkWin: board.checkForWin,
   getActivePlayer,
   checkDraw: board.checkForDraw,
-  restart
+  reset
  }
 }
 
-function ScreenController() {
-  const game = GameController("Black", "White");
+function ScreenController(first,second) {
+  const game = GameController(first,second);
   const boardDiv = document.querySelector('.board');
   const playerTurnDiv = document.querySelector('.turn');
-  const restartButton = document.querySelector('.reset');
+  const resetButton = document.querySelector('.reset');
   
-
   const updateScreen = () => {
     const activePlayer = game.getActivePlayer()
     const board = game.getBoard();
@@ -175,15 +176,43 @@ function ScreenController() {
       playerTurnDiv.textContent = "It's a draw!!";
       return;
     }
-
   }
+
   boardDiv.addEventListener('click',clickHandlerBoard);
-  restartButton.addEventListener('click', () => {
-    game.restart();
+  
+  resetButton.addEventListener('click', () => {
+    game.reset();
     updateScreen();
   });
-  updateScreen()
 
+  updateScreen()
+  return {
+    game: GameController()
+  }
 }
 
-ScreenController()
+function StartGame() {
+  const modal = document.querySelector('.modal');
+  const startButton = document.querySelector('.start');
+  const span = document.querySelector('.close');
+  const players = [];
+  startButton.addEventListener('click', () => modal.style.display = "block")
+
+  span.addEventListener('click', () => modal.style.display = "none")
+
+  window.addEventListener('click', (e) => {
+    if(e.target == modal) {
+      modal.style.display = "none";
+    }
+  })
+
+  function startGame() {
+    var playerOneName = document.getElementById("playerOne").value;
+    var playerTwoName = document.getElementById("playerTwo").value;
+    modal.style.display = "none";
+    ScreenController(playerOneName,playerTwoName);
+  }
+  const okay = document.querySelector('#okay');
+  okay.addEventListener('click',startGame);
+}
+StartGame();
